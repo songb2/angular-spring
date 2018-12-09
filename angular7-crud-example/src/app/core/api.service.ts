@@ -9,6 +9,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   baseUrl: string = 'http://localhost:8080/users/';
+  articleApiUrl: string = 'http://localhost:8080/api/articles'
 
   login(loginPayload) : Observable<ApiResponse> {
     return this.http.post<ApiResponse>('http://localhost:8080/' + 'token/generate-token', loginPayload);
@@ -32,5 +33,9 @@ export class ApiService {
 
   deleteUser(id: number): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(this.baseUrl + id);
+  }
+
+  getArticles() : Observable<ApiResponse> {
+    return this.http.get<ApiResponse> (this.articleApiUrl);
   }
 }
