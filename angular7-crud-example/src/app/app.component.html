@@ -1,7 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="http://www.myenglishtoday.net">My English Today</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <button *ngFor="let navItem of menu.navItems" [class.active]="navItem.isActive" (click)="toggleState(navItem)" class="btn btn-success btn-sm" routerLink="{{navItem.linkUrl}}">
+        {{navItem.linkText}}
+      </button>
+    </div>
+  </div>
 </nav>
 <router-outlet></router-outlet>

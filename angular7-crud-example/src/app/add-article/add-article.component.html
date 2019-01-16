@@ -1,0 +1,31 @@
+<div class="col-md-6 user-container">
+  <h2 class="text-center">Add Article</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="categoryId">Category Id:</label>
+      <input formControlName="categoryId" placeholder="category id" name="categoryId" class="form-control" id="categoryId">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" formControlName="name" placeholder="name" name="name" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" formControlName="title" placeholder="title" name="title" class="form-control" id="title">
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content:</label>
+      <input formControlName="content" placeholder="content" name="content" class="form-control" id="content">
+    </div>
+
+    <div class="form-group">
+      <label for="video">Video:</label>
+      <input type="file" formControlName="video" placeholder="upload video" name="video" class="form-control" id="video" (change)="setVideo($event.target.files)">
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="addForm.invalid || addForm.prestine">Add</button>
+  </form>
+</div>

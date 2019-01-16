@@ -1,3 +1,30 @@
-<p>
-  list-article works!
-</p>
+<div class="col-md-6 article-container">
+    <h2 style="margin: auto"> Article Details</h2>
+    <button class="btn badge badge-success" style="width:150px;" (click)="addArticle()">Add Article</button>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Category Id</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Content</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let article of articles">
+        <td class="hidden">{{article.id}}</td>
+        <td>{{article.categoryId}}</td>
+        <td>{{article.name}}</td>
+        <td>{{article.title}}</td>
+        <td>{{article.content}}</td>
+        <td>
+          <button class="btn badge badge-success" routerLink="/article-detail/{{article.id}}">Details</button>
+          <button class="btn badge badge-danger" (click)="deleteArticle(article)">Delete</button>
+          <button class="btn badge badge-warning" (click)="editArticle(article)">Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  

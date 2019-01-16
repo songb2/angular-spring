@@ -1,6 +1,6 @@
 <div class="col-md-6 user-container">
   <h2 style="margin: auto"> User Details</h2>
-  <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+  <button class="btn badge badge-success" (click)="addUser()" style="width:100px;">Add User</button>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -20,8 +20,10 @@
       <td>{{user.username}}</td>
       <td>{{user.age}}</td>
       <td>{{user.salary}}</td>
-      <td><button class="btn btn-success" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+      <td>
+        <button class="btn badge badge-danger" (click)="deleteUser(user)">Delete</button>
+        <button class="btn badge badge-warning" (click)="editUser(user)">Edit</button>
+      </td>
     </tr>
     </tbody>
   </table>

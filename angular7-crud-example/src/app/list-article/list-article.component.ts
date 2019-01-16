@@ -17,9 +17,19 @@ export class ListArticleComponent implements OnInit {
     if(!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
-    }
+    };
     this.apiService.getArticles().subscribe( data => {
       this.articles = data.result;
+    });
+  }
+
+  addArticle(): void {
+    this.router.navigate(['add-article']);
+  }
+
+  deleteArticle(article: Article) {
+    this.apiService.deleteArticle(article.id).subscribe(data => {
+      this.articles = this.articles.filter(a => a != article);
     });
   }
 

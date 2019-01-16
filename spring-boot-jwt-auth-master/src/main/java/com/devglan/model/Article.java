@@ -23,6 +23,8 @@ public class Article
     private String name;
     private String title;
     private String content;
+    @Lob
+    private byte[] video;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -71,6 +73,14 @@ public class Article
     }
     public String getContent() {
         return content;
+    }
+
+    public void setVideo(byte[] video)
+    {
+        this.video = video;
+    }
+    public byte[] getVideo() {
+        return video;
     }
 
     public void setCreatedAt(Date createdAt) {

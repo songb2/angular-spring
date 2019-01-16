@@ -12,6 +12,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {routing} from "./app.routing";
 import {TokenInterceptor} from "./core/interceptor";
 import { ListArticleComponent } from './list-article/list-article.component';
+import { AddArticleComponent } from './add-article/add-article.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ListArticleComponent } from './list-article/list-article.component';
     AddUserComponent,
     EditUserComponent,
     ListUserComponent,
-    ListArticleComponent
+    ListArticleComponent,
+    AddArticleComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
