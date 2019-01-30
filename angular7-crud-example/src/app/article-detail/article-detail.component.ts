@@ -11,6 +11,7 @@ import { ApiService } from '../core/api.service';
 export class ArticleDetailComponent implements OnInit {
 
   article:Article;
+  private base64Video: any;
   constructor(private activeRoute: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit() {
@@ -18,6 +19,7 @@ export class ArticleDetailComponent implements OnInit {
     this.apiService.getArticle(+id)
       .subscribe( data => {
         this.article = data.result;
+        this.base64Video = "data:video/mp4;base64," + data.result.video;
       });
   }
 

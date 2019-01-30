@@ -2,6 +2,9 @@
     <div class="container">
       <h1 class="display-4">{{article.title}} - {{article.name}}</h1>
       <p class="lead">{{article.content}}</p>
-      <p>created at: {{article.createdAt | date:'full'}}</p>
+      <p>
+          <video controls [src]="base64Video">
+          </video>
+      </p>
     </div>
   </div>

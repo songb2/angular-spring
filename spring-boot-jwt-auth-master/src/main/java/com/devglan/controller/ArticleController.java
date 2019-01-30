@@ -3,12 +3,11 @@ package com.devglan.controller;
 import com.devglan.exception.*;
 import com.devglan.model.ApiResponse;
 import com.devglan.model.Article;
-import com.devglan.model.ArticleDto;
-import com.devglan.service.ArticleService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.devglan.dao.ArticleDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +44,9 @@ public class ArticleController {
     public Article createArticle(@RequestPart("video") MultipartFile video,
      @RequestPart("article") String articleString) throws JsonParseException, JsonMappingException, IOException{
         Article article = new ObjectMapper().readValue(articleString, Article.class);
-        article.setName(video.getOriginalFilename()); 
-        article.setVideo(video.getBytes());
+        article.setName(video.getOriginalFilename());
+        byte[] byteArr = video.getBytes();
+        article.setVideo(byteArr);
         return articleRepository.save(article);
     }
 

@@ -23,7 +23,7 @@
 
     <div class="form-group">
       <label for="video">Video:</label>
-      <input type="file" formControlName="video" placeholder="upload video" name="video" class="form-control" id="video" (change)="setVideo($event.target.files)">
+      <input type="file" placeholder="upload video" name="video" class="form-control" id="video" (change)="setVideo($event.target.files)">
     </div>
 
     <button type="submit" class="btn btn-success" [disabled]="addForm.invalid || addForm.prestine">Add</button>
