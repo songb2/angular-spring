@@ -2,11 +2,12 @@ package com.devglan.controller;
 
 import com.devglan.exception.*;
 import com.devglan.model.ApiResponse;
-import com.devglan.model.Article;
+import com.devglan.model.*;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.devglan.dao.ArticleDao;
+import com.devglan.dao.CategoryDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,17 @@ public class ArticleController {
     @Autowired
     ArticleDao articleRepository;
 
+    @Autowired
+    CategoryDao categoryRepository;
+
     @GetMapping("/articles")
     public ApiResponse<List<Article>> getAllArticles() {
         List<Article> list = new ArrayList<>();
+
+        articleRepository.findAll().forEach(action -> {
+            Category category = action.getCategory();
+            action.setCategory(category);
+        });
         articleRepository.findAll().iterator().forEachRemaining(list::add);
         
 		return new ApiResponse<>(HttpStatus.OK.value(), "Article list fetched successfully.",list);
@@ -43,10 +52,21 @@ public class ArticleController {
     @PostMapping("/articles")
     public Article createArticle(@RequestPart("video") MultipartFile video,
      @RequestPart("article") String articleString) throws JsonParseException, JsonMappingException, IOException{
+
         Article article = new ObjectMapper().readValue(articleString, Article.class);
         article.setName(video.getOriginalFilename());
         byte[] byteArr = video.getBytes();
         article.setVideo(byteArr);
+
+        List<Category> list = new ArrayList<>();
+        Iterable<Category> all = categoryRepository.findAll();
+        all.iterator().forEachRemaining(list::add);
+        int categoryId = article.getCategoryId();
+        Category category = categoryRepository.findById(categoryId)
+            .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+        
+        article.setCategory(category);
+
         return articleRepository.save(article);
     }
 

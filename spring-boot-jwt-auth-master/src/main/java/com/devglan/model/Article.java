@@ -3,12 +3,16 @@ package com.devglan.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "articles")
@@ -19,7 +23,31 @@ public class Article
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "categoryId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties
+    private Category category;
+    public void setCategory(Category category)
+    {
+        this.category = category;
+    }
+    public Category getCategory()
+    {
+        return category;
+    }
+
+    @JsonInclude
+    @Transient
     private int categoryId;
+    public void setCategoryId(int categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+    public int getCategoryId()
+    {
+        return categoryId;
+    }
     private String name;
     private String title;
     private String content;
@@ -41,14 +69,6 @@ public class Article
     }
     public int getId() {
         return id;
-    }
-    
-    public void setCategoryId(int categoryId)
-    {
-        this.categoryId = categoryId;
-    }
-    public int getCategoryId() {
-        return categoryId;
     }
 
     public void setName(String name)

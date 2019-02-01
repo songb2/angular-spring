@@ -55,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Article save(ArticleDto article) {
 	    Article newArticle = new Article();
         newArticle.setName(article.getName());
-        newArticle.setCategoryId(article.getCategoryId());
+        //newArticle.setCategoryId(article.getCategoryId());
         newArticle.setTitle(article.getTitle());
         newArticle.setContent(article.getContent());
         
